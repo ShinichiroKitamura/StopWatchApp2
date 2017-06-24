@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     var startTime: TimeInterval? = nil
     var timer = Timer()
+    var elapsedTime: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class ViewController: UIViewController {
         if let startTime = self.startTime {
             
             //スタートボタン押下時からの経過時刻を取得
-            let t:Double = Date.timeIntervalSinceReferenceDate - startTime
+            let t:Double = Date.timeIntervalSinceReferenceDate - startTime + self.elapsedTime
             
             //取得した時刻をラベル表示用定数に設定
             let min = Int(t / 60)
@@ -64,8 +65,15 @@ class ViewController: UIViewController {
     
     @IBAction func stopTimer(_ sender: Any) {
         
+        
         //タイマーを停止
         self.timer.invalidate()
+        
+        //タイマー停止時の経過時間を取得
+        if let startTime = self.startTime {
+            self.elapsedTime += Date.timeIntervalSinceReferenceDate - startTime
+        }
+        
     }
     
     @IBAction func resetTimer(_ sender: Any) {
@@ -73,6 +81,7 @@ class ViewController: UIViewController {
         //タイマーを初期化
         self.startTime = nil
         self.timerLabel.text = "00:00:00"
+        self.elapsedTime = 0.0
     }
     
 }
