@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     
     var startTime: TimeInterval? = nil
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,7 @@ class ViewController: UIViewController {
         self.startTime = Date.timeIntervalSinceReferenceDate
         
         //タイマーを起動
-        Timer.scheduledTimer(
+        self.timer = Timer.scheduledTimer(
             timeInterval: 0.01
             , target: self
             , selector: #selector(self.update)
@@ -62,9 +63,16 @@ class ViewController: UIViewController {
 
     
     @IBAction func stopTimer(_ sender: Any) {
+        
+        //タイマーを停止
+        self.timer.invalidate()
     }
     
     @IBAction func resetTimer(_ sender: Any) {
+        
+        //タイマーを初期化
+        self.startTime = nil
+        self.timerLabel.text = "00:00:00"
     }
     
 }
