@@ -65,6 +65,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="resetButton" destination="C1x-Cc-Uz7" id="vlA-fy-PNV"/>
+                        <outlet property="startButton" destination="TwC-HE-MgU" id="6QD-an-0oc"/>
+                        <outlet property="stopButton" destination="XrO-g7-wcd" id="V9E-Pc-sJj"/>
                         <outlet property="timerLabel" destination="rXN-OZ-DFS" id="kNg-so-dqf"/>
                     </connections>
                 </viewController>

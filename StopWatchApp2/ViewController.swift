@@ -11,6 +11,9 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     
     var startTime: TimeInterval? = nil
     var timer = Timer()
@@ -18,6 +21,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //start: true, stop: false, reset: false
+        setButtonEnabled(start: true, stop: false, reset: false)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -26,6 +33,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func setButtonEnabled(start: Bool, stop: Bool, reset: Bool){
+        self.startButton.isEnabled = start
+        self.stopButton.isEnabled = stop
+        self.resetButton.isEnabled = reset
+
+    }
+    
     func update(){
         
         //Optional Binding
@@ -49,6 +63,9 @@ class ViewController: UIViewController {
     
     @IBAction func startTimer(_ sender: Any) {
         
+        //start: false, stop: true, reset: false
+        setButtonEnabled(start: false, stop: true, reset: false)
+
         //起動時間を取得
         self.startTime = Date.timeIntervalSinceReferenceDate
         
@@ -65,6 +82,8 @@ class ViewController: UIViewController {
     
     @IBAction func stopTimer(_ sender: Any) {
         
+        //start: true, stop: false, reset: true
+        setButtonEnabled(start: true, stop: false, reset: true)
         
         //タイマーを停止
         self.timer.invalidate()
@@ -77,6 +96,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resetTimer(_ sender: Any) {
+        
+        //start: true, stop: false, reset: false
+        setButtonEnabled(start: true, stop: false, reset: false)
         
         //タイマーを初期化
         self.startTime = nil
